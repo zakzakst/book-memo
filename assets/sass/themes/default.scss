@@ -1,0 +1,9 @@
+:root {
+  --theme-text: black;
+  --theme-bg: white;
+}
+
+.theme__element {
+  color: var(--theme-text);
+  background-color: var(--theme-bg);
+}
