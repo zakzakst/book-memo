@@ -13,13 +13,13 @@
 </template>
 
 <style lang="scss">
-.sample-component {
-  &__text {
-    color: $color-text--sample2;
-  }
-}
-.theme-component__element {
-  color: $color-text--sample2;
-  background-color: var(--theme-bg);
-}
+// .sample-component {
+//   &__text {
+//     color: $color-text--sample2;
+//   }
+// }
+// .theme-component__element {
+//   color: $color-text--sample2;
+//   background-color: var(--theme-bg);
+// }
 </style>
