@@ -1,9 +1,14 @@
-:root {
-  --theme-text: black;
-  --theme-bg: white;
-}
+// :root {
+//   --theme-text: black;
+//   --theme-bg: white;
+// }
 
-.theme__element {
-  color: var(--theme-text);
-  background-color: var(--theme-bg);
+// .theme__element {
+//   color: var(--theme-text);
+//   background-color: var(--theme-bg);
+// }
+
+:root {
+  --theme-anim-text: white;
+  --theme-anim-bg: black;
 }
