@@ -30,6 +30,7 @@ export default {
   */
   css: [
     '@/assets/css/normalize.css',
+    '@/assets/sass/bulma-customize.scss',
     '@/assets/sass/common.scss',
     '@/assets/sass/themes.scss',
   ],
@@ -55,6 +56,7 @@ export default {
   modules: [
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
+    'nuxt-fontawesome',
   ],
   styleResources: {
     scss: [
@@ -66,5 +68,14 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+  },
+  fontawesome: {
+    component: 'fa',
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+    ]
   }
 }
