@@ -18,7 +18,6 @@ export const mutations = {
     }
   },
   deleteItem(state, payload) {
-    console.log(payload.key);
     for(let i = 0; i < state.items.length; i++) {
       const item = state.items[i];
       if(item.key === payload.key) {
@@ -44,7 +43,6 @@ export const actions = {
       });
   },
   readItems({commit}, payload) {
-    console.log(payload);
     fireApp.database().ref(`base/items/${payload}`).on('child_added', snapshot => {
       const item = {
         key: snapshot.key,

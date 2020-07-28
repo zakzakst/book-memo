@@ -24,7 +24,7 @@ export default {
     }
   },
   created() {
-    if(!this.items && this.id) {
+    if(!this.items.length && this.id) {
       this.$store.dispatch('items/readItems', this.id);
     }
   },
