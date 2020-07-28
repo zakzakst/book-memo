@@ -40,6 +40,7 @@ export default {
   */
   plugins: [
     { src: '~/plugins/animation.js', ssr: false },
+    { src: '~/plugins/vee-validate.js' },
   ],
   /*
   ** Auto import components
