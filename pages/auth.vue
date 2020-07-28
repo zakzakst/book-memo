@@ -12,20 +12,22 @@
           <div class="field">
             <label class="label">メールアドレス</label>
             <div class="control has-icons-left">
-              <input v-model="email" class="input" type="text" placeholder="base@mail.co.jp">
+              <input name="email" v-model="email" class="input" type="text" placeholder="base@mail.co.jp" v-validate="'required|min:4'" :class="{ 'is-danger': errors.has('email') }">
               <span class="icon is-left">
                 <fa :icon="['fas', 'envelope']" />
               </span>
             </div>
+            <p v-show="errors.has('email')" class="has-text-danger is-size-7">必須項目です。メールアドレスを入力してください</p>
           </div>
           <div class="field">
             <label class="label">パスワード</label>
             <div class="control has-icons-left">
-              <input v-model="password" class="input" type="password" placeholder="password">
+              <input name="password" v-model="password" class="input" type="password" placeholder="password" v-validate="'required|min:6'" :class="{ 'is-danger': errors.has('password') }">
               <span class="icon is-left">
                 <fa :icon="['fa', 'lock']" />
               </span>
             </div>
+            <p v-show="errors.has('email')" class="has-text-danger is-size-7">必須項目です。6文字以上のパスワードを入力してください</p>
           </div>
           <div class="field">
             <div class="control">
@@ -46,8 +48,8 @@ export default {
   data() {
     return {
       formActive: 'signIn',
-      email: 'base@mail.co.jp',
-      password: 'password'
+      email: '',
+      password: ''
     }
   },
   mixins: [
@@ -58,10 +60,20 @@ export default {
       this.formActive = type;
     },
     authSignIn() {
-      this.signIn(this.email, this.password);
+      this.$validator.validateAll()
+        .then(result => {
+          if(result) {
+            this.signIn(this.email, this.password);
+          }
+        });
     },
     authSignUp() {
-      this.signUp(this.email, this.password);
+      this.$validator.validateAll()
+        .then(result => {
+          if(result) {
+            this.signUp(this.email, this.password);
+          }
+        });
     },
   }
 }
