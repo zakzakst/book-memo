@@ -58,6 +58,7 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
     'nuxt-fontawesome',
+    '@nuxtjs/axios',
   ],
   styleResources: {
     scss: [
@@ -78,5 +79,8 @@ export default {
         icons: ['fas']
       },
     ]
+  },
+  router: {
+    linkExactActiveClass: 'is-active'
   }
 }
