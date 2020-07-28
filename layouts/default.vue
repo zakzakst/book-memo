@@ -32,7 +32,7 @@ export default {
   ],
   watch: {
     settings(value) {
-      this.themeClass = `theme--${value.theme}`;
+      this.themeClass = value ? `theme--${value.theme}` : '';
     }
   }
 }

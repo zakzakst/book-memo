@@ -8,7 +8,7 @@ export default async ({ app, store }) => {
     store.commit('animation/setPageEnter', true);
     setTimeout(() => {
       next();
-    }, 2000);
+    }, 1400);
   });
   app.router.afterEach((to, from) => {
     console.log('アニメーション：ページ遷移後');

@@ -63,9 +63,9 @@ export default {
   },
   watch: {
     settings(value) {
-      this.name = value.name;
-      this.message = value.message;
-      this.theme = value.theme;
+      this.name = value ? value.name : '';
+      this.message = value ? value.message : '';
+      this.theme = value ? value.theme : '';
     }
   }
 }
