@@ -9,7 +9,7 @@ export default {
     },
   },
   created() {
-    if(!this.settings && this.id) {
+    if(this.id) {
       this.$store.dispatch('settings/setSettings', this.id);
     }
   },
