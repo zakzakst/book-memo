@@ -24,6 +24,7 @@ export const actions = {
       })
       .then(() => {
         commit('setId', userId);
+        this.$router.push('/');
         console.log('サインアップ');
       })
       .catch(error => {
@@ -33,6 +34,7 @@ export const actions = {
   signin({commit}, payload) {
     fireApp.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then(() => {
+        this.$router.push('/');
         console.log('サインイン');
       })
       .catch(error => {
@@ -43,6 +45,7 @@ export const actions = {
     fireApp.auth().signOut()
       .then(() => {
         commit('setId', null);
+        this.$router.push('/auth');
         console.log('サインアウト');
       })
       .catch(error => {

@@ -51,10 +51,6 @@ export default {
           to: '/',
         },
         {
-          label: '承認',
-          to: '/auth',
-        },
-        {
           label: '項目一覧',
           to: '/items',
         },
