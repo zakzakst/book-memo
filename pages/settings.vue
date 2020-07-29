@@ -30,7 +30,9 @@
                   <span class="file-name">{{ imageName }}</span>
                 </label>
               </div>
-              <img :src="imageSrc" alt="">
+              <p v-if="imageSrc">
+                <img :src="imageSrc" alt="プロフィール画像">
+              </p>
             </div>
           </div>
           <div class="field">
@@ -100,6 +102,14 @@ export default {
     },
     storageUrl(value) {
       this.imageSrc = value || '';
+    }
+  },
+  head () {
+    return {
+      title: '設定ページ',
+      meta: [
+        { hid: 'description', name: 'description', content: '自身のプロフィールを設定するページ' }
+      ]
     }
   }
 }
