@@ -60,6 +60,7 @@ export default {
     '@nuxtjs/style-resources',
     'nuxt-fontawesome',
     '@nuxtjs/axios',
+    '@nuxtjs/toast',
   ],
   styleResources: {
     scss: [
