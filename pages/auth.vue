@@ -75,6 +75,14 @@ export default {
           }
         });
     },
+  },
+  head () {
+    return {
+      title: '認証ページ',
+      meta: [
+        { hid: 'description', name: 'description', content: 'ユーザー認証を行うページ' }
+      ]
+    }
   }
 }
 </script>

@@ -132,6 +132,14 @@ export default {
       const itemKey = e.target.getAttribute('href');
       this.deleteItem(itemKey);
     }
+  },
+  head () {
+    return {
+      title: '項目ページ',
+      meta: [
+        { hid: 'description', name: 'description', content: '項目を登録・編集・削除するページ' }
+      ]
+    }
   }
 }
 </script>

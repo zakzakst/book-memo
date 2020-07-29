@@ -65,6 +65,14 @@ export default {
     query(value) {
       this.getSearchResult(value);
     }
+  },
+  head () {
+    return {
+      title: `検索結果｜${this.$route.query.text}`,
+      meta: [
+        { hid: 'description', name: 'description', content: '検索結果を表示するページ' }
+      ]
+    }
   }
 }
 </script>
