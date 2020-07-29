@@ -1,9 +1,10 @@
 export default {
   methods: {
-    updateSettings(data) {
+    updateSettings(data, storage) {
       const settingsData = {
         id: this.id,
-        data: data
+        data: data,
+        storage: storage,
       }
       this.$store.dispatch('settings/updateSettings', settingsData);
     },
@@ -17,6 +18,9 @@ export default {
     settings() {
       return this.$store.getters['settings/settings'];
     },
+    storageUrl() {
+      return this.$store.getters['settings/storageUrl'];
+    },
     id() {
       return this.$store.getters['auth/id'];
     }
@@ -25,8 +29,10 @@ export default {
     id(value) {
       if(value) {
         this.$store.dispatch('settings/setSettings', this.id);
+        this.$store.dispatch('settings/setStorageUrl', this.id);
       } else {
         this.$store.dispatch('settings/clearSettings');
+        this.$store.dispatch('settings/clearStorageUrl');
       }
     }
   }

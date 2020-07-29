@@ -16,6 +16,24 @@
             </div>
           </div>
           <div class="field">
+            <label class="label">プロフィール画像</label>
+            <div class="control">
+              <div class="file has-name is-fullwidth">
+                <label class="file-label">
+                  <input @change="imageSelect" class="file-input" type="file" name="resume">
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <fa :icon="['fa', 'upload']" />
+                    </span>
+                    <span class="file-label">ファイルを選択</span>
+                  </span>
+                  <span class="file-name">{{ imageName }}</span>
+                </label>
+              </div>
+              <img :src="imageSrc" alt="">
+            </div>
+          </div>
+          <div class="field">
             <label class="label">テーマ</label>
             <div class="control">
               <label class="radio">
@@ -46,19 +64,32 @@ export default {
       name: '',
       message: '',
       theme: '',
+      image: null,
+      imageName: '',
+      imageSrc: '',
     }
   },
   mixins: [
     settingsMixin
   ],
   methods: {
+    imageSelect(e) {
+      const file = e.target.files[0];
+      this.imageName = file.name;
+      this.image = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageSrc = reader.result
+      }
+      reader.readAsDataURL(file);
+    },
     settingsUpdateSettings() {
       const data = {
         name: this.name,
         message: this.message,
         theme: this.theme || 'default'
-      }
-      this.updateSettings(data);
+      };
+      this.updateSettings(data, this.image);
     }
   },
   watch: {
@@ -66,6 +97,9 @@ export default {
       this.name = value ? value.name : '';
       this.message = value ? value.message : '';
       this.theme = value ? value.theme : '';
+    },
+    storageUrl(value) {
+      this.imageSrc = value || '';
     }
   }
 }
