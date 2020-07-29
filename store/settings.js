@@ -3,6 +3,7 @@ import fireApp from '@/plugins/firebase'
 export const state = () => ({
   settings: null,
   storageUrl: '',
+  updating: false,
 })
 
 export const mutations = {
@@ -11,11 +12,15 @@ export const mutations = {
   },
   setStorageUrl(state, payload) {
     state.storageUrl = payload;
+  },
+  setUpdating(state, payload) {
+    state.updating = payload;
   }
 }
 
 export const actions = {
   updateSettings({commit}, payload) {
+    commit('setUpdating', true);
     fireApp.database().ref(`base/settings/${payload.id}`).set(payload.data)
       .then(() => {
         commit('setSettings', payload.data);
@@ -27,6 +32,7 @@ export const actions = {
         }
       })
       .then(() => {
+        commit('setUpdating', false);
         console.log('設定ストレージ更新');
       });
   },
@@ -59,5 +65,8 @@ export const getters = {
   },
   storageUrl(state) {
     return state.storageUrl;
+  },
+  updating(state) {
+    return state.updating;
   }
 }

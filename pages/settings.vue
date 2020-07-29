@@ -48,7 +48,7 @@
           </div>
           <div class="field">
             <div class="control">
-              <button @click="settingsUpdateSettings" class="button is-link is-fullwidth">設定更新</button>
+              <button @click="settingsUpdateSettings" class="button is-link is-fullwidth" :class="{ 'is-loading': settingsUpdating }">設定更新</button>
             </div>
           </div>
         </div>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import gsap from 'gsap';
 import settingsMixin from '~/mixins/settingsMixin';
 
 export default {
@@ -92,7 +93,14 @@ export default {
         theme: this.theme || 'default'
       };
       this.updateSettings(data, this.image);
-    }
+    },
+    showUpdated() {
+      this.$toast.show('更新完了', {
+        theme: 'bubble',
+        position: 'top-center',
+        duration: 1500
+      });
+    },
   },
   watch: {
     settings(value) {
@@ -102,6 +110,12 @@ export default {
     },
     storageUrl(value) {
       this.imageSrc = value || '';
+    },
+    settingsUpdating(newVal, oldVal) {
+      if(!newVal && oldVal) {
+        this.showUpdated();
+        console.log('更新完了メッセージ');
+      }
     }
   },
   head () {

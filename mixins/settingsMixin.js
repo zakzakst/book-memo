@@ -21,6 +21,9 @@ export default {
     storageUrl() {
       return this.$store.getters['settings/storageUrl'];
     },
+    settingsUpdating() {
+      return this.$store.getters['settings/updating'];
+    },
     id() {
       return this.$store.getters['auth/id'];
     }
