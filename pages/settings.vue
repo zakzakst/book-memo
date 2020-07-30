@@ -102,6 +102,9 @@ export default {
       });
     },
   },
+  created() {
+    this.imageSrc = this.storageUrl;
+  },
   watch: {
     settings(value) {
       this.name = value ? value.name : '';

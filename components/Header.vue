@@ -3,7 +3,7 @@
     <nav class="navbar">
       <div class="navbar-brand">
         <nuxt-link class="navbar-item" to="/">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          <img src="/img/logo.png" width="112" height="28">
         </nuxt-link>
         <a v-if="id" @click.prevent="menuToggle" :class="{ 'is-active': menuOpen }" class="navbar-burger burger" role="button">
           <span></span>
@@ -77,15 +77,15 @@ export default {
     },
     authsignOut() {
       this.signOut();
-      const self = this;
-      this.$toast.show('サインアウト完了', {
-        theme: 'bubble',
-        position: 'top-center',
-        duration: 1000,
-        onComplete() {
-          self.$router.push('/auth');
-        }
-      });
+      // const self = this;
+      // this.$toast.show('サインアウト完了', {
+      //   theme: 'bubble',
+      //   position: 'top-center',
+      //   duration: 1000,
+      //   onComplete() {
+      //     self.$router.push('/auth');
+      //   }
+      // });
     },
   },
   computed: {

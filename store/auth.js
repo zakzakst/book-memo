@@ -52,9 +52,11 @@ export const actions = {
   signout({commit}) {
     fireApp.auth().signOut()
       .then(() => {
-        commit('setId', null);
-        // this.$router.push('/auth');
-        console.log('サインアウト');
+        this.$router.push('/auth');
+        setTimeout(() => {
+          commit('setId', null);
+          console.log('サインアウト');
+        }, 500);
       })
       .catch(error => {
         console.log(error);
@@ -65,6 +67,8 @@ export const actions = {
       if(user) {
         commit('setId', user.uid);
         console.log('ユーザーIDセット', user.uid);
+      } else {
+        // this.$router.push('/auth');
       }
     });
   }
