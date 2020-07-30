@@ -39,6 +39,7 @@ export default {
       name: '',
       message: '',
       theme: '',
+      itemsLimitNum: 3,
     }
   },
   mixins: [
@@ -57,7 +58,11 @@ export default {
   },
   computed: {
     limitItems() {
-      return this.items.slice(0, 3);
+      const reverseArr = [];
+      for(let i = this.items.length; i > 0; i--) {
+        reverseArr.push(this.items[i - 1]);
+      }
+      return reverseArr.slice(0, this.itemsLimitNum);
     }
   },
   watch: {

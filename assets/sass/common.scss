@@ -28,3 +28,12 @@
 //   opacity: 0;
 //   transform: translate(0, 30px);
 // }
+
+
+.items-enter-active, .items-leave-active {
+  transition: opacity 1s, transform 1s;
+}
+.items-enter, .items-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
