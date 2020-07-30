@@ -125,6 +125,6 @@ export default {
         { hid: 'description', name: 'description', content: '自身のプロフィールを設定するページ' }
       ]
     }
-  }
+  },
 }
 </script>

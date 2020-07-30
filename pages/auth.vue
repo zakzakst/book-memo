@@ -83,6 +83,15 @@ export default {
         { hid: 'description', name: 'description', content: 'ユーザー認証を行うページ' }
       ]
     }
+  },
+  transition(to, from) {
+    // if(to.name === 'auth') {
+    //   return 'slide-up';
+    // }
+    // if(from.name === 'auth') {
+    //   return 'slide-down';
+    // }
+    return 'slide-up';
   }
 }
 </script>

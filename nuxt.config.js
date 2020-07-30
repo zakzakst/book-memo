@@ -1,4 +1,3 @@
-
 export default {
   /*
   ** Nuxt rendering mode
@@ -39,7 +38,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    { src: '~/plugins/animation.js', ssr: false },
+    // { src: '~/plugins/animation.js', ssr: false },
     { src: '~/plugins/vee-validate.js' },
   ],
   /*
@@ -83,6 +82,7 @@ export default {
     ]
   },
   router: {
-    linkExactActiveClass: 'is-active'
+    linkExactActiveClass: 'is-active',
+    middleware: 'auth'
   }
 }
