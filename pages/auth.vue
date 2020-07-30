@@ -31,8 +31,8 @@
           </div>
           <div class="field">
             <div class="control">
-              <button v-show="formActive==='signIn'" @click="authSignIn" class="button is-link is-fullwidth">サインイン</button>
-              <button v-show="formActive==='signUp'" @click="authSignUp" class="button is-link is-fullwidth">新規登録</button>
+              <button v-show="formActive==='signIn'" @click="authSignIn" class="button is-link is-fullwidth" :class="{ 'is-loading': signInBusy }">サインイン</button>
+              <button v-show="formActive==='signUp'" @click="authSignUp" class="button is-link is-fullwidth" :class="{ 'is-loading': signInBusy }">新規登録</button>
             </div>
           </div>
         </div>
@@ -75,6 +75,26 @@ export default {
           }
         });
     },
+    showSignInDone() {
+      const self = this;
+      const message = this.formActive === 'signIn' ? 'サインイン完了' : 'サインアップ完了';
+      this.$toast.show(message, {
+        theme: 'bubble',
+        position: 'top-center',
+        duration: 1000,
+        onComplete() {
+          self.$router.push('/');
+        }
+      });
+    }
+  },
+  watch: {
+    signInBusy(newVal, oldVal) {
+      if(!newVal && oldVal) {
+        this.showSignInDone();
+        console.log('サインイン完了メッセージ');
+      }
+    }
   },
   head () {
     return {

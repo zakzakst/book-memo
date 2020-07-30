@@ -83,6 +83,6 @@ export default {
   },
   router: {
     linkExactActiveClass: 'is-active',
-    middleware: 'auth'
+    middleware: ['auth', 'menu']
   }
 }
