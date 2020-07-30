@@ -23,18 +23,20 @@
                 </div>
               </div>
             </div>
-            <div v-for="item in items" :key="item.key" class="column is-12">
-              <div class="card">
-                <div class="card-content">
-                  <h3 class="is-size-5">{{ item.data.title }}</h3>
-                  <p>{{ item.data.text }}</p>
-                </div>
-                <div class="card-footer">
-                  <a @click.prevent="showUpdateModal" :href="item.key" class="card-footer-item" role="button">編集</a>
-                  <a @click.prevent="itemsDeleteItem" :href="item.key" class="card-footer-item" role="button">削除</a>
+            <transition-group name="items">
+              <div v-for="item in limitItems" :key="item.key" class="column is-12">
+                <div class="card">
+                  <div class="card-content">
+                    <h3 class="is-size-5">{{ item.data.title }}</h3>
+                    <p>{{ item.data.text }}</p>
+                  </div>
+                  <div class="card-footer">
+                    <a @click.prevent="showUpdateModal" :href="item.key" class="card-footer-item" role="button">編集</a>
+                    <a @click.prevent="itemsDeleteItem" :href="item.key" class="card-footer-item" role="button">削除</a>
+                  </div>
                 </div>
               </div>
-            </div>
+            </transition-group>
             <div class="modal" :class="{ 'is-active': upDateModalActive }">
               <div class="modal-background"></div>
               <div class="modal-card">
@@ -62,6 +64,15 @@
                 </footer>
               </div>
             </div>
+            <nav class="pagination is-centered" role="navigation" aria-label="pagination" :class="$style.pagination">
+              <a class="pagination-previous" :disabled="itemsCurrentPos === 1">＜</a>
+              <a class="pagination-next" :disabled="itemsCurrentPos === limitButtons">＞</a>
+              <ul class="pagination-list">
+                <li v-for="n in limitButtons" :key="n">
+                  <nuxt-link :to="`/items?page=${n}`" class="pagination-link" :class="{'is-current': n === itemsCurrentPos}">{{ n }}</nuxt-link>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
@@ -81,6 +92,7 @@ export default {
       upDateKey: '',
       upDateTitle: '',
       upDateText: '',
+      itemsLimitNum: 5,
     }
   },
   mixins: [
@@ -131,6 +143,25 @@ export default {
     itemsDeleteItem(e) {
       const itemKey = e.target.getAttribute('href');
       this.deleteItem(itemKey);
+    },
+  },
+  computed: {
+    limitItems() {
+      const itemsStart = (this.itemsCurrentPos - 1) * this.itemsLimitNum + 1 - 1;
+      const reverseArr = [];
+      for(let i = this.items.length; i > 0; i--) {
+        reverseArr.push(this.items[i - 1]);
+      }
+      return reverseArr.slice(itemsStart, itemsStart + this.itemsLimitNum);
+    },
+    itemsLength() {
+      return this.items.length;
+    },
+    itemsCurrentPos() {
+      return Number(this.$route.query.page || 1);
+    },
+    limitButtons() {
+      return Math.ceil(this.items.length / this.itemsLimitNum);
     }
   },
   head () {
@@ -143,3 +174,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" module>
+.pagination {
+  margin: 0 auto;
+}
+</style>
