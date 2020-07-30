@@ -5,14 +5,14 @@
         <nuxt-link class="navbar-item" to="/">
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
         </nuxt-link>
-        <a v-if="id" @click.prevent="menuToggle" :class="{ 'is-active': menuActive }" class="navbar-burger burger" role="button">
+        <a v-if="id" @click.prevent="menuToggle" :class="{ 'is-active': menuOpen }" class="navbar-burger burger" role="button">
           <span></span>
           <span></span>
           <span></span>
         </a>
       </div>
 
-      <div v-if="id" :class="{ 'is-active': menuActive }" class="navbar-menu">
+      <div v-if="id" :class="{ 'is-active': menuOpen }" class="navbar-menu">
         <div class="navbar-start">
           <nuxt-link v-for="(link, index) in links" :key="index" :to="link.to" class="navbar-item">{{ link.label }}</nuxt-link>
         </div>
@@ -44,7 +44,7 @@ import authMixin from '~/mixins/authMixin';
 export default {
   data() {
     return {
-      menuActive: false,
+      // menuActive: false,
       links: [
         {
           label: 'トップ',
@@ -67,7 +67,8 @@ export default {
   ],
   methods: {
     menuToggle() {
-      this.menuActive = !this.menuActive;
+      // this.menuActive = !this.menuActive;
+      this.$store.commit('menu/setMenuOpen', !this.menuOpen);
     },
     search() {
       const searchText = this.searchText;
@@ -76,7 +77,21 @@ export default {
     },
     authsignOut() {
       this.signOut();
-    }
+      const self = this;
+      this.$toast.show('サインアウト完了', {
+        theme: 'bubble',
+        position: 'top-center',
+        duration: 1000,
+        onComplete() {
+          self.$router.push('/auth');
+        }
+      });
+    },
+  },
+  computed: {
+    menuOpen() {
+      return this.$store.getters['menu/menuOpen'];
+    },
   }
 }
 </script>

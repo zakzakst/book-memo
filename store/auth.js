@@ -2,16 +2,21 @@ import fireApp from '@/plugins/firebase'
 
 export const state = () => ({
   id: null,
+  signInBusy: false,
 })
 
 export const mutations = {
   setId(state, payload) {
     state.id = payload;
+  },
+  setSignInBusy(state, payload) {
+    state.signInBusy = payload;
   }
 }
 
 export const actions = {
   signup({commit}, payload) {
+    commit('setSignInBusy', true);
     let userId = null;
     fireApp.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       .then(data => {
@@ -24,7 +29,8 @@ export const actions = {
       })
       .then(() => {
         commit('setId', userId);
-        this.$router.push('/');
+        commit('setSignInBusy', false);
+        // this.$router.push('/');
         console.log('サインアップ');
       })
       .catch(error => {
@@ -32,9 +38,11 @@ export const actions = {
       });
   },
   signin({commit}, payload) {
+    commit('setSignInBusy', true);
     fireApp.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then(() => {
-        this.$router.push('/');
+        commit('setSignInBusy', false);
+        // this.$router.push('/');
         console.log('サインイン');
       })
       .catch(error => {
@@ -45,7 +53,7 @@ export const actions = {
     fireApp.auth().signOut()
       .then(() => {
         commit('setId', null);
-        this.$router.push('/auth');
+        // this.$router.push('/auth');
         console.log('サインアウト');
       })
       .catch(error => {
@@ -65,5 +73,8 @@ export const actions = {
 export const getters = {
   id(state) {
     return state.id;
+  },
+  signInBusy(state) {
+    return state.signInBusy;
   }
 }

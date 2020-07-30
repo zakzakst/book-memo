@@ -26,6 +26,9 @@ export default {
   computed: {
     id() {
       return this.$store.getters['auth/id'];
-    }
+    },
+    signInBusy() {
+      return this.$store.getters['auth/signInBusy'];
+    },
   }
 }
